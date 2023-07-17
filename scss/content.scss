@@ -125,3 +125,12 @@
         background-color: $redDarkColor;
     }
 }
+
+@media (max-width: 495px) {
+    .option {
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
