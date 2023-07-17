@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&display=swap');
+
 $redColor: #f54811;
 $grayColor01: #c7ced0;
 $grayColor02: #f8f8f8;
+
+* {
+    box-sizing: border-box;
+    font-family: 'IBM Plex Mono', monospace;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
 
 body {
     margin: 0;
@@ -16,7 +26,7 @@ main {
 .wrapper {
     margin: 0 auto;
     padding: 0 15px;
-    max-width: 1240px;
+    max-width: 1270px;
 }
 
 .col {
