@@ -33,3 +33,20 @@
     0% { transform: rotate(0deg) }
     100% { transform: rotate(360deg) }
 }
+
+.card {
+    margin-left: 15px;
+    margin-bottom: 1em;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 6px;
+    position: relative;
+    box-shadow: 0 0 15px 5px rgba(0,0,0,.05);
+    padding: 15px;
+
+    > p {
+        font-weight: 600;
+        margin: 0;
+        position: relative;
+    }
+}

@@ -25,7 +25,7 @@ async function GetJsonData() {
       const response = await fetch(url)
       data = await response.json()
       console.log(data)
-      
+
       // Perform group by when data is ready
       PerformGroup()
     } catch (error) {
@@ -48,6 +48,9 @@ function PerformGroup() {
     } else {
         GroupByAuthor()
     }
+
+    // Create post content when data is grouped
+    CreatePostContent()
 }
 
 function GroupByWeek() {
@@ -106,6 +109,63 @@ function GroupByAuthor() {
     }
 
     console.log(dataGrouped)
+}
+
+// ===========================
+// DISPLAY JSON ON HTML
+// ===========================
+function CreatePostContent() {
+    for (const [key, group] of Object.entries(dataGrouped)) {
+        let container = document.createElement("div")
+    
+        let label = document.createElement("h4")
+        label.textContent = key
+
+        container.appendChild(label)
+
+        for (const post of group) {
+            let card = document.createElement("div")
+            card.className = "card"
+
+            let id = document.createElement("p")
+            id.textContent = `Post Id: ${post.id}`
+
+            let arrow = document.createElement("div")
+            arrow.className = "card_arrow"
+
+            let expandable = document.createElement('div');
+            expandable.className = "expandable"
+
+            let location = document.createElement("p")
+            location.textContent = post.location
+    
+            const date = GetDate(post.time)
+    
+            let timeLocation = document.createElement("p")
+            timeLocation.textContent = `${post.location}, ${date.monthStr} ${date.day}, ${date.year}`
+            timeLocation.id = `card_location_${post.id}`
+
+            let text = document.createElement("p")
+            text.textContent = post.text
+            text.id = `card_text_${post.id}`
+    
+            let author = document.createElement("p")
+            author.textContent = post.author
+            author.id = `card_author_${post.id}`
+
+            id.appendChild(arrow);
+            expandable.appendChild(author)
+            expandable.appendChild(timeLocation)
+            expandable.appendChild(text)
+
+            card.appendChild(id)
+            card.appendChild(expandable)
+    
+            container.appendChild(card)
+        }
+
+        dynamicContent.appendChild(container)
+    }
 }
 
 // ===========================
