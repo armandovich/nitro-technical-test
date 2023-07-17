@@ -4,12 +4,12 @@ Nitro Exercise for Frontend Engineer
 
 ## Tech Stack
 
-**Client:** HTML, SASS, Javascript
+**Client:** HTML, SASS, JavaScript
 
 **Server:** Node v18.3.0, Express
 
 
-## How run project
+## Steps To Run Project
 
 To install dependencies run:
 ```bash
@@ -25,6 +25,11 @@ or
 
 ```bash
   node index.js
+```
+
+Open localhost on prefered browser:
+```bash
+http://localhost:3000
 ```
 
 ## Image Ownership and Usage Disclaimer
