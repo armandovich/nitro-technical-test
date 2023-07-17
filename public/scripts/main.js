@@ -10,6 +10,8 @@ let data = null
 let groupType = 0
 // Will hold grouped JSON data
 let dataGrouped = [] 
+// Store list of group by option to modify
+let btnOptions = document.querySelectorAll(".option")
 // Container where dynamic content will be display
 let dynamicContent = document.getElementById("dynamic") 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -24,7 +26,6 @@ async function GetJsonData() {
     try {
       const response = await fetch(url)
       data = await response.json()
-      console.log(data)
 
       // Perform group by when data is ready
       PerformGroup()
@@ -33,9 +34,20 @@ async function GetJsonData() {
     }
 }
 
+
 // ===========================
 // GROUP BY LOGIC
 // ===========================
+function SelectOption(value) {
+    if (groupType != value) {
+        btnOptions[groupType].classList.remove("selected")
+        groupType = value
+        btnOptions[groupType].classList.add("selected")
+
+        PerformGroup()
+    }
+}
+
 function PerformGroup() {
     dataGrouped = [] // Clear array of grouped data
     dynamicContent.innerHTML = "" // Clean container
@@ -71,8 +83,6 @@ function GroupByWeek() {
         // Store the post data in the dictionary
         dataGrouped[key].push(post)
     }
-
-    console.log(dataGrouped)
 }
 
 function GroupByLocation() {
@@ -89,8 +99,6 @@ function GroupByLocation() {
         // Store the post data in the dictionary
         dataGrouped[location].push(post)
     }
-
-    console.log(dataGrouped)
 }
 
 function GroupByAuthor() {
@@ -107,8 +115,6 @@ function GroupByAuthor() {
         // Store the post data in the dictionary
         dataGrouped[author].push(post)
     }
-
-    console.log(dataGrouped)
 }
 
 // ===========================
@@ -207,7 +213,6 @@ function GetWeekNumber(date) {
 // INITIALIZATION
 // ===========================
 function Init() {
-    console.log('Script Init')
     GetJsonData()
 }
 
