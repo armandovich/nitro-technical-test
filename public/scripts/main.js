@@ -7,7 +7,7 @@
 let data = null 
 //Group By selected where:
 // 0 = week, 1 = location, 2 = author
-let groupType = 1 
+let groupType = 2 
 // Will hold grouped JSON data
 let dataGrouped = [] 
 // Container where dynamic content will be display
@@ -71,7 +71,22 @@ function GroupByLocation() {
 }
 
 function GroupByAuthor() {
-    // TO-DO
+    // Iterate trougth json data
+    for (const post of data) {
+         // We store the author for easy usage
+        const author = post.author
+        
+        // If no key on our dictionary is found
+        // we create the key
+        if (!dataGrouped[author]) {
+            dataGrouped[author] = []
+        }
+
+        // We store the post data in the dictionary
+        dataGrouped[author].push(post)
+    }
+
+    console.log(dataGrouped)
 }
 
 // ===========================
