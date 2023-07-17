@@ -15,11 +15,25 @@
     border-radius: 6px;
     border: 1px solid $grayColor01;
     cursor: pointer;
+    color: #000;
+    transition: border 0.5s, background-color 0.5s, color 0.5s;
+
+    &:hover {
+        color: $redDarkColor;
+        border: 1px solid $grayColor01;
+        background-color: $grayColor01;
+    }
 
     &.selected {
         color: $grayColor02;
         border: 1px solid $redColor;
         background-color: $redColor;
+        transition: border 0.5s, background-color 0.5s;
+
+        &:hover {
+            border: 1px solid $redDarkColor;
+            background-color: $redDarkColor;
+        }
     }
 }
 
@@ -104,4 +118,10 @@
     padding: 2px 10px;
     cursor: pointer;
     display: none;
+    transition: border 0.5s, background-color 0.5s;
+
+    &:hover {
+        border: 1px solid $redDarkColor;
+        background-color: $redDarkColor;
+    }
 }
