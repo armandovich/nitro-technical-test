@@ -130,45 +130,56 @@ function GroupByAuthor() {
 // DISPLAY JSON ON HTML
 // ===========================
 function CreatePostContent() {
+    // Iterate trougth grouped data
     for (const [key, group] of Object.entries(dataGrouped)) {
+        // Create a container for the group
         let container = document.createElement("div")
     
+        // Create the group title
         let label = document.createElement("h4")
         label.textContent = key
 
+        // Add the title on the group container
         container.appendChild(label)
 
         for (const post of group) {
+            // Create the card container
             let card = document.createElement("div")
             card.className = "card"
 
+            // Create the id label
             let id = document.createElement("p")
             id.textContent = `Post Id: ${post.id}`
 
+            // Create the expand/collaps arrow icon
             let arrow = document.createElement("div")
             arrow.className = "card_arrow"
 
+            // Create expandable/collapse container
             let expandable = document.createElement('div');
             expandable.className = "expandable"
-
-            let location = document.createElement("p")
-            location.textContent = post.location
     
+            // Get the current post date data
             const date = GetDate(post.time)
     
+            // Create location and date label
             let timeLocation = document.createElement("p")
             timeLocation.textContent = `${post.location}, ${date.monthStr} ${date.day}, ${date.year}`
 
+            // Create text label
             let text = document.createElement("p")
             text.textContent = post.text
     
+            // Create author label
             let author = document.createElement("p")
             author.textContent = post.author
 
+            // Create tap area for toggle expand/collaps card state
             let tapArea = document.createElement("div")
             tapArea.className = "cta_expand"
             tapArea.addEventListener('click', ToggleCards)
 
+            // Create tap area to edit post
             let tapEdit = document.createElement("div")
             tapEdit.className = "cta_edit"
             tapEdit.textContent = "Edit"
@@ -177,19 +188,24 @@ function CreatePostContent() {
             })
             
 
+            // Add the arrow on ID label
             id.appendChild(arrow);
+            // Add content to the expandable container
             expandable.appendChild(author)
             expandable.appendChild(timeLocation)
             expandable.appendChild(text)
 
+            // Add all content on the card container
             card.appendChild(id)
             card.appendChild(expandable)
             card.appendChild(tapArea)
             card.appendChild(tapEdit)
     
+            // Add card on group container
             container.appendChild(card)
         }
 
+        // Add group container on dynamic container
         dynamicContent.appendChild(container)
     }
 }
