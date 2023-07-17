@@ -15,7 +15,16 @@ let btnOptions = document.querySelectorAll(".option")
 // Container where dynamic content will be display
 let dynamicContent = document.getElementById("dynamic") 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"]
-
+// Keep track of the selected post to edit
+let postIdx = 0;
+// Modal with form
+let modal = document.getElementById("modal")
+// Element to display selected post ID on modal
+let idField = document.getElementById("postId")
+// Inputs fields for post data manipulation 
+let authorField = document.getElementById("author")
+let locationField = document.getElementById("location")
+let textField = document.getElementById("textField")
 
 // ===========================
 // REQUEST TO GET DATA
@@ -149,19 +158,24 @@ function CreatePostContent() {
     
             let timeLocation = document.createElement("p")
             timeLocation.textContent = `${post.location}, ${date.monthStr} ${date.day}, ${date.year}`
-            timeLocation.id = `card_location_${post.id}`
 
             let text = document.createElement("p")
             text.textContent = post.text
-            text.id = `card_text_${post.id}`
     
             let author = document.createElement("p")
             author.textContent = post.author
-            author.id = `card_author_${post.id}`
 
             let tapArea = document.createElement("div")
             tapArea.className = "cta_expand"
             tapArea.addEventListener('click', ToggleCards)
+
+            let tapEdit = document.createElement("div")
+            tapEdit.className = "cta_edit"
+            tapEdit.textContent = "Edit"
+            tapEdit.addEventListener('click', function() {
+                OpenEditModal(post.id)
+            })
+            
 
             id.appendChild(arrow);
             expandable.appendChild(author)
@@ -171,11 +185,37 @@ function CreatePostContent() {
             card.appendChild(id)
             card.appendChild(expandable)
             card.appendChild(tapArea)
+            card.appendChild(tapEdit)
     
             container.appendChild(card)
         }
 
         dynamicContent.appendChild(container)
+    }
+}
+
+// ===========================
+// UPDATE DATA LOGIC
+// ===========================
+
+function UpdateData() {
+
+    if(IsValid(authorField) && IsValid(locationField) && IsValid(textField)) {
+        data[postIdx].author = authorField.value
+        data[postIdx].location = locationField.value
+        data[postIdx].text = textField.value
+
+        CloseModal()
+        PerformGroup()
+    }
+}
+
+function IsValid(elem) {
+    if (elem.value == "") {
+        elem.classList.add('empty');
+        return false
+    } else {
+        return true
     }
 }
 
@@ -217,6 +257,34 @@ function GetWeekNumber(date) {
 function ToggleCards(event) {
     // Add/remove selected class to the post cards to expand or collaps
     event.target.parentElement.classList.toggle("selected")
+}
+
+function OpenEditModal(id) {
+    // Find index of the clicked post
+    postIdx = data.findIndex((post) => post.id === id)
+    // Display selected post ID
+    idField.textContent = data[postIdx].id
+    // Display selected post Author on input
+    authorField.value = data[postIdx].author
+    // Display selected post Location on input
+    locationField.value = data[postIdx].location
+    // Display selected post Text on textarea
+    textField.value = data[postIdx].text
+
+    // Add class to the modal, for fade in
+    modal.classList.add("active")
+}
+
+function CloseModal() {
+    modal.classList.remove("active")
+    CleanInputs()
+}
+
+function CleanInputs() {
+    // Remove the empty class for all inputs
+    authorField.classList.remove('empty');
+    locationField.classList.remove('empty');
+    textField.classList.remove('empty');
 }
 
 // ===========================

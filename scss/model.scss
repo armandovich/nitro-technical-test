@@ -1,0 +1,89 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 12;
+
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    opacity: 0.8;
+}
+
+.box {
+    overflow-y: scroll;
+    height: auto;
+    width: 90%;
+    max-width: 400px;
+    max-height: 600px;
+    position: relative;
+    background: #f8f8f8;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+input,
+textarea {
+    border: solid 1px $grayColor01;
+    border-radius: 6px;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+
+    &.empty {
+        border-color: $redColor;
+    }
+}
+
+textarea {
+    resize: none;
+}
+
+.btn {
+    outline: unset;
+    font-size: 16px;
+    padding: 11px 31px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btnRow {
+    width: 100%;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.btnUpdate {
+    color: $grayColor02;
+    border: 1px solid $redColor;
+    background-color: $redColor;
+}
+
+.btnCancel {
+    background-color: transparent;
+    border: 1px solid $grayColor01;
+}
