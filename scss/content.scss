@@ -1,0 +1,24 @@
+.title {
+    display: block;
+}
+
+.content {
+    display: block;
+    padding-bottom: 100px;
+}
+
+.option {
+    font-display: inherit;
+    display: inline-block;
+    margin-right: 2em;
+    padding: 0.5em 2em;
+    border-radius: 6px;
+    border: 1px solid $grayColor01;
+    cursor: pointer;
+
+    &.selected {
+        color: $grayColor02;
+        border: 1px solid $redColor;
+        background-color: $redColor;
+    }
+}
