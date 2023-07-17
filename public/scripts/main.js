@@ -159,6 +159,10 @@ function CreatePostContent() {
             author.textContent = post.author
             author.id = `card_author_${post.id}`
 
+            let tapArea = document.createElement("div")
+            tapArea.className = "cta_expand"
+            tapArea.addEventListener('click', ToggleCards)
+
             id.appendChild(arrow);
             expandable.appendChild(author)
             expandable.appendChild(timeLocation)
@@ -166,6 +170,7 @@ function CreatePostContent() {
 
             card.appendChild(id)
             card.appendChild(expandable)
+            card.appendChild(tapArea)
     
             container.appendChild(card)
         }
@@ -207,6 +212,11 @@ function GetWeekNumber(date) {
     // Calculate how many days pass in given year and divided by 7
     // to get the week number
     return Math.ceil((timeDif / dayMilliseconds + janFirst.getDay() + 1) / 7)
+}
+
+function ToggleCards(event) {
+    // Add/remove selected class to the post cards to expand or collaps
+    event.target.parentElement.classList.toggle("selected")
 }
 
 // ===========================
